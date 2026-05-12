@@ -48,7 +48,7 @@ export default function SignUpPage() {
           </div>
 
           <button
-            onClick={() => { window.location.href = '/api/auth/google'; }}
+            onClick={() => { window.location.href = `${import.meta.env.VITE_API_URL || ''}/api/auth/google`; }}
             className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 rounded-lg text-sm font-medium transition-all duration-150 mb-4"
             style={{ background: '#fff', color: '#1a1a1a' }}
             onMouseEnter={e => e.currentTarget.style.background = '#f5f5f5'}

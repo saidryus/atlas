@@ -2,6 +2,11 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+// Point all axios requests to the Render backend in production
+if (import.meta.env.VITE_API_URL) {
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+}
+
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
