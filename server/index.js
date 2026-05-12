@@ -46,6 +46,46 @@ app.use('/api/recommendations', require('./routes/recommendations'));
 app.use('/api/checkins', require('./routes/checkins'));
 app.use('/api/analytics', require('./routes/analytics'));
 
+// One-time seed endpoint — hit this URL once to populate the database
+// Protected by a secret key so random people can't wipe your data
+app.post('/api/admin/seed', async (req, res) => {
+  const { secret } = req.body;
+  if (secret !== process.env.SEED_SECRET) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  try {
+    const Location = require('./models/Location');
+    const count = await Location.countDocuments();
+    if (count > 0) {
+      return res.json({ message: `Already seeded — ${count} locations exist. Send force:true to reseed.`, count });
+    }
+    const seedFn = require('./seed/seed');
+    await seedFn();
+    const newCount = await Location.countDocuments();
+    res.json({ message: `Seeded successfully`, count: newCount });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Force reseed endpoint
+app.post('/api/admin/reseed', async (req, res) => {
+  const { secret } = req.body;
+  if (secret !== process.env.SEED_SECRET) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  try {
+    const Location = require('./models/Location');
+    await Location.deleteMany({});
+    const seedFn = require('./seed/seed');
+    await seedFn();
+    const count = await Location.countDocuments();
+    res.json({ message: `Reseeded successfully`, count });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);

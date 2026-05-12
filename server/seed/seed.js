@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config({ path: '../.env' });
-const Location = require('../models/Location');
-
-const locations = [
+const Location = require('../models/Location');const locations = [
   // GYMS - IT Park
   { name: 'Anytime Fitness IT Park', category: 'gym', address: 'Cebu IT Park, Lahug', area: 'IT Park', latitude: 10.3310, longitude: 123.9050, rating: 4.5, priceLevel: 3, description: '24/7 gym with modern equipment inside Cebu IT Park. Popular with BPO workers.', images: ['https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600'], openingHours: { weekdays: 'Open 24 hours', weekends: 'Open 24 hours', is24Hours: true }, amenities: { airConditioned: true, shower: true, parking: true }, checkInCount: 45 },
   { name: "Gold's Gym Ayala Center Cebu", category: 'gym', address: 'Ayala Center Cebu, Cebu Business Park', area: 'Ayala', latitude: 10.3179, longitude: 123.9054, rating: 4.3, priceLevel: 3, description: 'Full-service gym with weights, cardio, and group classes inside Ayala mall.', images: ['https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600'], openingHours: { weekdays: '6:00 AM - 10:00 PM', weekends: '7:00 AM - 9:00 PM' }, amenities: { airConditioned: true, shower: true, parking: true, beginnerFriendly: true }, checkInCount: 38 },
