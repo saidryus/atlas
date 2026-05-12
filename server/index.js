@@ -21,7 +21,9 @@ app.use('/api/auth', rateLimit({ windowMs: 15 * 60 * 1000, max: 30, message: { e
 app.use(cors({
   origin: [
     process.env.CLIENT_URL || 'http://localhost:5173',
-    /\.vercel\.app$/,   // allow any vercel preview URL
+    'https://atlas-jla1.vercel.app',
+    'https://atlas-seven-olive.vercel.app',
+    /\.vercel\.app$/,
   ],
   credentials: true,
 }));
