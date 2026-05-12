@@ -54,7 +54,16 @@ async function seed() {
   await Location.deleteMany({});
   await Location.insertMany(locations);
   console.log('Seeded ' + locations.length + ' locations');
-  mongoose.disconnect();
+  // Only disconnect if running standalone (not embedded in server startup)
+  if (require.main === module) {
+    mongoose.disconnect();
+  }
 }
 
-seed().catch(console.error);
+// Run standalone: node seed/seed.js
+if (require.main === module) {
+  seed().catch(console.error);
+}
+
+// Export for use in server startup
+module.exports = seed;

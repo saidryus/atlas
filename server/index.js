@@ -53,8 +53,27 @@ app.use((err, req, res, next) => {
 });
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
+  .then(async () => {
     console.log('MongoDB connected');
-    app.listen(process.env.PORT, () => console.log(`Server on port ${process.env.PORT}`));
+
+    // Auto-seed if SEED_ON_START=true is set in environment
+    if (process.env.SEED_ON_START === 'true') {
+      try {
+        const Location = require('./models/Location');
+        const count = await Location.countDocuments();
+        if (count === 0) {
+          console.log('No locations found — running seed...');
+          require('./seed/seed.js');
+        } else {
+          console.log(`Seed skipped — ${count} locations already exist`);
+        }
+      } catch (e) {
+        console.error('Seed error:', e.message);
+      }
+    }
+
+    app.listen(process.env.PORT || 5000, () =>
+      console.log(`Server on port ${process.env.PORT || 5000}`)
+    );
   })
   .catch(err => console.error(err));
