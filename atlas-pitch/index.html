@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atlas — Pitch Deck</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;font-family:'Inter',sans-serif;background:#080c10;color:#fff;overflow:hidden}
+.deck{width:100%;height:100vh;position:relative}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 64px;opacity:0;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(20px)}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.slide.prev{opacity:0;transform:translateY(-20px)}
+.accent{color:#4ade80}
+.accent-dim{color:rgba(74,222,128,.7)}
+.muted{color:rgba(255,255,255,.45)}
+.muted2{color:rgba(255,255,255,.28)}
+.panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:20px 24px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:rgba(74,222,128,.85)}
+.dot{width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block}
+.dot-y{background:#fbbf24}
+.dot-r{background:#f87171}
+.nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:100;background:rgba(8,12,16,.85);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.09);border-radius:40px;padding:10px 20px}
+.nav button{background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:13px;font-weight:500;padding:4px 12px;border-radius:20px;transition:all .15s}
+.nav button:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav button.active-nav{color:#4ade80}
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22c55e,#4ade80);transition:width .3s ease;z-index:200}
+.slide-num{position:fixed;top:20px;right:28px;font-size:11px;color:rgba(255,255,255,.25);font-weight:500;z-index:100}
+.check{color:#4ade80;font-weight:700}
+.cross{color:rgba(255,255,255,.25)}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.07)}
+td{font-size:13px;color:rgba(255,255,255,.70);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+td:first-child{color:rgba(255,255,255,.85);font-weight:500}
+.kf{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.28);margin-bottom:6px}
+.big{font-size:52px;font-weight:900;line-height:1;color:rgba(255,255,255,.06)}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="slide-num" id="snum">1 / 10</div>
+<div class="deck" id="deck">
+<!-- SLIDE 1: COVER -->
+<div class="slide active" id="s1" style="background:linear-gradient(160deg,#080c10 0%,#0a1a0e 55%,#080c10 100%)">
+  <div class="text-center max-w-2xl">
+    <div class="tag mb-6"><span class="dot"></span> Cebu City, Philippines &middot; 2025</div>
+    <div style="font-size:80px;font-weight:900;letter-spacing:-3px;line-height:1;color:rgba(255,255,255,.92)" class="mb-3">Atlas</div>
+    <p style="font-size:22px;font-weight:300;color:rgba(255,255,255,.45);letter-spacing:.01em" class="mb-8">
+      Cebu&rsquo;s Fitness &amp; Sports Discovery Platform
+    </p>
+    <p style="font-size:15px;color:rgba(255,255,255,.28)">Find your next workout. Right where you are.</p>
+    <div class="mt-12 flex justify-center gap-8">
+      <div class="text-center"><div style="font-size:28px;font-weight:800;color:#4ade80">50+</div><div style="font-size:11px;color:rgba(255,255,255,.30);margin-top:2px">Locations</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.08)"></div>
+      <div class="text-center"><div style="font-size:28px;font-weight:800;color:#4ade80">9</div><div style="font-size:11px;color:rgba(255,255,255,.30);margin-top:2px">Cebu Areas</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.08)"></div>
+      <div class="text-center"><div style="font-size:28px;font-weight:800;color:#4ade80">4</div><div style="font-size:11px;color:rgba(255,255,255,.30);margin-top:2px">Categories</div></div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 2: PROBLEM -->
+<div class="slide" id="s2" style="background:#080c10">
+  <div class="w-full max-w-4xl">
+    <div class="kf mb-2">The Problem</div>
+    <h2 style="font-size:36px;font-weight:800;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:32px">
+      Finding fitness spots in Cebu<br/>is a <span class="accent">guessing game.</span>
+    </h2>
+    <div class="grid grid-cols-2 gap-5">
+      <div>
+        <div class="panel mb-4" style="border-left:3px solid rgba(74,222,128,.4)">
+          <p style="font-size:13px;font-style:italic;color:rgba(255,255,255,.60);line-height:1.6">
+            &ldquo;Maria finishes her BPO shift at IT Park. She wants to play badminton. She has no idea where the nearest court is, if it&rsquo;s open, or how crowded it gets at 10 PM. She ends up scrolling Facebook groups for 20 minutes.&rdquo;
+          </p>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,.30)">This happens every day across Cebu.</p>
+      </div>
+      <div class="space-y-3">
+        <div class="panel flex gap-3 items-start">
+          <span style="color:#f87171;font-size:16px;margin-top:1px">&#9679;</span>
+          <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">No dedicated platform</p><p style="font-size:12px;color:rgba(255,255,255,.40);margin-top:2px">Zero fitness-specific discovery apps for Cebu</p></div>
+        </div>
+        <div class="panel flex gap-3 items-start">
+          <span style="color:#f87171;font-size:16px;margin-top:1px">&#9679;</span>
+          <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Google Maps falls short</p><p style="font-size:12px;color:rgba(255,255,255,.40);margin-top:2px">No crowd levels, no fitness filters, no local context</p></div>
+        </div>
+        <div class="panel flex gap-3 items-start">
+          <span style="color:#f87171;font-size:16px;margin-top:1px">&#9679;</span>
+          <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Wasted trips</p><p style="font-size:12px;color:rgba(255,255,255,.40);margin-top:2px">You drive to the gym. It&rsquo;s packed. You had no way to know.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 3: SOLUTION -->
+<div class="slide" id="s3" style="background:#080c10">
+  <div class="w-full max-w-4xl">
+    <div class="kf mb-2">The Solution</div>
+    <h2 style="font-size:36px;font-weight:800;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:28px">
+      <span class="accent">Atlas</span> &mdash; Cebu&rsquo;s fitness<br/>discovery platform.
+    </h2>
+    <div class="grid grid-cols-2 gap-5">
+      <div class="space-y-3">
+        <div class="panel flex gap-3 items-start">
+          <span class="accent" style="font-size:18px;margin-top:-1px">&#10003;</span>
+          <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Interactive map</p><p style="font-size:12px;color:rgba(255,255,255,.40);margin-top:2px">50+ gyms, parks, courts &amp; nutrition stores</p></div>
+        </div>
+        <div class="panel flex gap-3 items-start">
+          <span class="accent" style="font-size:18px;margin-top:-1px">&#10003;</span>
+          <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Real-time crowd levels</p><p style="font-size:12px;color:rgba(255,255,255,.40);margin-top:2px">Community check-ins show how busy it is right now</p></div>
+        </div>
+        <div class="panel flex gap-3 items-start">
+          <span class="accent" style="font-size:18px;margin-top:-1px">&#10003;</span>
+          <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Smart suggestions</p><p style="font-size:12px;color:rgba(255,255,255,.40);margin-top:2px">&ldquo;Best time to visit: before 9 AM&rdquo;</p></div>
+        </div>
+        <div class="panel flex gap-3 items-start">
+          <span class="accent" style="font-size:18px;margin-top:-1px">&#10003;</span>
+          <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Advanced filters</p><p style="font-size:12px;color:rgba(255,255,255,.40);margin-top:2px">Distance, price, AC, parking, shower, 24/7</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel h-full flex flex-col justify-center" style="background:rgba(34,197,94,.04);border-color:rgba(34,197,94,.15)">
+          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(74,222,128,.6);margin-bottom:16px">User Flow</p>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3"><div style="width:24px;height:24px;border-radius:50%;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4ade80;flex-shrink:0">1</div><p style="font-size:13px;color:rgba(255,255,255,.65)">Open Atlas &rarr; location auto-detected</p></div>
+            <div class="flex items-center gap-3"><div style="width:24px;height:24px;border-radius:50%;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4ade80;flex-shrink:0">2</div><p style="font-size:13px;color:rgba(255,255,255,.65)">Browse map or list &rarr; apply filters</p></div>
+            <div class="flex items-center gap-3"><div style="width:24px;height:24px;border-radius:50%;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4ade80;flex-shrink:0">3</div><p style="font-size:13px;color:rgba(255,255,255,.65)">View crowd intel &amp; best visit time</p></div>
+            <div class="flex items-center gap-3"><div style="width:24px;height:24px;border-radius:50%;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4ade80;flex-shrink:0">4</div><p style="font-size:13px;color:rgba(255,255,255,.65)">Check in &rarr; save favorites</p></div>
+          </div>
+          <div class="mt-4 pt-4" style="border-top:1px solid rgba(255,255,255,.07)">
+            <p style="font-size:11px;color:rgba(255,255,255,.30)">No account needed to browse &mdash; works as guest</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 4: MARKET -->
+<div class="slide" id="s4" style="background:#080c10">
+  <div class="w-full max-w-4xl">
+    <div class="kf mb-2">Market Opportunity</div>
+    <h2 style="font-size:36px;font-weight:800;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:28px">
+      950,000 people.<br/><span class="accent">Zero dedicated fitness apps.</span>
+    </h2>
+    <div class="grid grid-cols-3 gap-4 mb-5">
+      <div class="panel text-center">
+        <div style="font-size:36px;font-weight:900;color:#4ade80;line-height:1">950K</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:6px">Cebu City Population</div>
+      </div>
+      <div class="panel text-center">
+        <div style="font-size:36px;font-weight:900;color:#4ade80;line-height:1">280K</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:6px">Target Users (18&ndash;40)</div>
+      </div>
+      <div class="panel text-center">
+        <div style="font-size:36px;font-weight:900;color:#4ade80;line-height:1">8.5%</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:6px">PH Fitness Industry CAGR</div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="panel">
+        <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:12px">Market Segments</p>
+        <div class="space-y-2">
+          <div class="flex justify-between"><span style="font-size:13px;color:rgba(255,255,255,.65)">Gym-goers &amp; fitness enthusiasts</span><span style="font-size:13px;font-weight:600;color:#4ade80">~85K</span></div>
+          <div class="flex justify-between"><span style="font-size:13px;color:rgba(255,255,255,.65)">Recreational sports players</span><span style="font-size:13px;font-weight:600;color:#4ade80">~70K</span></div>
+          <div class="flex justify-between"><span style="font-size:13px;color:rgba(255,255,255,.65)">Runners &amp; outdoor enthusiasts</span><span style="font-size:13px;font-weight:600;color:#4ade80">~60K</span></div>
+          <div class="flex justify-between"><span style="font-size:13px;color:rgba(255,255,255,.65)">Health &amp; nutrition shoppers</span><span style="font-size:13px;font-weight:600;color:#4ade80">~65K</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:12px">Market Size</p>
+        <div class="space-y-3">
+          <div><div class="flex justify-between mb-1"><span style="font-size:12px;color:rgba(255,255,255,.50)">TAM &mdash; PH Fitness &amp; Wellness</span><span style="font-size:12px;font-weight:700;color:rgba(255,255,255,.70)">&#8369;2.4B</span></div><div style="height:4px;background:rgba(255,255,255,.07);border-radius:2px"><div style="width:100%;height:100%;background:rgba(74,222,128,.25);border-radius:2px"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span style="font-size:12px;color:rgba(255,255,255,.50)">SAM &mdash; Cebu Fitness &amp; Sports</span><span style="font-size:12px;font-weight:700;color:rgba(255,255,255,.70)">&#8369;180M</span></div><div style="height:4px;background:rgba(255,255,255,.07);border-radius:2px"><div style="width:60%;height:100%;background:rgba(74,222,128,.45);border-radius:2px"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span style="font-size:12px;color:rgba(255,255,255,.50)">SOM &mdash; Year 3 Target</span><span style="font-size:12px;font-weight:700;color:#4ade80">&#8369;18M</span></div><div style="height:4px;background:rgba(255,255,255,.07);border-radius:2px"><div style="width:20%;height:100%;background:#4ade80;border-radius:2px"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 5: VALUE PROPOSITION -->
+<div class="slide" id="s5" style="background:#080c10">
+  <div class="w-full max-w-4xl">
+    <div class="kf mb-2">Value Proposition</div>
+    <h2 style="font-size:36px;font-weight:800;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:28px">
+      The right place.<br/><span class="accent">The right time. Every time.</span>
+    </h2>
+    <div class="grid grid-cols-2 gap-5">
+      <div>
+        <div class="panel mb-4" style="background:rgba(34,197,94,.04);border-color:rgba(34,197,94,.15)">
+          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(74,222,128,.6);margin-bottom:12px">For Users</p>
+          <div class="space-y-2.5">
+            <div class="flex gap-2"><span class="accent" style="font-size:14px">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Save time &mdash; no more Facebook group searches</p></div>
+            <div class="flex gap-2"><span class="accent" style="font-size:14px">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Avoid crowds &mdash; see busyness before you go</p></div>
+            <div class="flex gap-2"><span class="accent" style="font-size:14px">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Discover hidden gems &mdash; local courts &amp; parks</p></div>
+            <div class="flex gap-2"><span class="accent" style="font-size:14px">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Personalized feed based on your schedule</p></div>
+          </div>
+        </div>
+        <div class="panel" style="background:rgba(59,130,246,.04);border-color:rgba(59,130,246,.15)">
+          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(96,165,250,.6);margin-bottom:12px">For Businesses</p>
+          <div class="space-y-2.5">
+            <div class="flex gap-2"><span style="color:#60a5fa;font-size:14px">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Free listing &amp; visibility to thousands of users</p></div>
+            <div class="flex gap-2"><span style="color:#60a5fa;font-size:14px">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Community check-ins build credibility</p></div>
+            <div class="flex gap-2"><span style="color:#60a5fa;font-size:14px">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Premium analytics on peak hours &amp; interest</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel flex flex-col justify-center" style="background:rgba(255,255,255,.02)">
+        <p style="font-size:13px;font-style:italic;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:20px">
+          &ldquo;Atlas is the only platform in Cebu that combines location discovery, real-time crowd intelligence, and community check-ins &mdash; built specifically for the fitness and sports community.&rdquo;
+        </p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2"><span class="dot"></span><p style="font-size:12px;color:rgba(255,255,255,.45)">Crowd prediction engine</p></div>
+          <div class="flex items-center gap-2"><span class="dot"></span><p style="font-size:12px;color:rgba(255,255,255,.45)">Fitness Accessibility Score per area</p></div>
+          <div class="flex items-center gap-2"><span class="dot"></span><p style="font-size:12px;color:rgba(255,255,255,.45)">Cebu-specific &mdash; not a generic global app</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 6: COMPETITION + PERCEPTUAL MAP -->
+<div class="slide" id="s6" style="background:#080c10">
+  <div class="w-full max-w-4xl">
+    <div class="kf mb-2">Competitive Matrix &amp; Perceptual Map</div>
+    <h2 style="font-size:32px;font-weight:800;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:24px">
+      We own a space <span class="accent">no one else is in.</span>
+    </h2>
+    <div class="grid grid-cols-2 gap-5">
+      <div class="panel" style="padding:16px">
+        <table>
+          <thead><tr><th>Feature</th><th style="text-align:center">Atlas</th><th style="text-align:center">Google</th><th style="text-align:center">Strava</th><th style="text-align:center">FB Groups</th></tr></thead>
+          <tbody>
+            <tr><td>Cebu fitness-specific</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td></tr>
+            <tr><td>Crowd intelligence</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td><td style="text-align:center;color:rgba(255,255,255,.35);font-size:11px">Partial</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td></tr>
+            <tr><td>Community check-ins</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td></tr>
+            <tr><td>Smart time suggestions</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td><td style="text-align:center;color:rgba(255,255,255,.20)">&#10007;</td></tr>
+            <tr><td>Free to use</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td><td style="text-align:center;color:rgba(255,255,255,.35);font-size:11px">Freemium</td><td style="text-align:center;color:#4ade80;font-weight:700">&#10003;</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel flex flex-col items-center justify-center" style="position:relative;min-height:220px">
+        <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:12px">Perceptual Map</p>
+        <div style="position:relative;width:220px;height:180px;border:1px solid rgba(255,255,255,.10);border-radius:8px;background:rgba(255,255,255,.02)">
+          <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,255,255,.08)"></div>
+          <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.08)"></div>
+          <span style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,.25)">Fitness-Specific</span>
+          <span style="position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,.25)">Generic</span>
+          <span style="position:absolute;left:4px;top:50%;transform:translateY(-50%);font-size:9px;color:rgba(255,255,255,.25)">Global</span>
+          <span style="position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:9px;color:rgba(255,255,255,.25)">Local</span>
+          <div style="position:absolute;top:20%;left:15%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.30)" title="Google Maps"></div>
+          <span style="position:absolute;top:14%;left:5%;font-size:9px;color:rgba(255,255,255,.30)">Google</span>
+          <div style="position:absolute;top:20%;right:20%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.30)"></div>
+          <span style="position:absolute;top:14%;right:8%;font-size:9px;color:rgba(255,255,255,.30)">Strava</span>
+          <div style="position:absolute;bottom:20%;left:15%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.30)"></div>
+          <span style="position:absolute;bottom:14%;left:4%;font-size:9px;color:rgba(255,255,255,.30)">FB Groups</span>
+          <div style="position:absolute;bottom:18%;right:16%;width:12px;height:12px;border-radius:50%;background:#4ade80;box-shadow:0 0 12px rgba(74,222,128,.5)"></div>
+          <span style="position:absolute;bottom:10%;right:4%;font-size:10px;font-weight:700;color:#4ade80">Atlas</span>
+        </div>
+        <p style="font-size:11px;color:rgba(255,255,255,.30);margin-top:10px;text-align:center">Blue ocean: Fitness-specific + Hyper-local</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 7: BUSINESS MODEL CANVAS -->
+<div class="slide" id="s7" style="background:#080c10;padding:32px 48px">
+  <div class="w-full max-w-5xl">
+    <div class="kf mb-2">Business Model Canvas</div>
+    <h2 style="font-size:28px;font-weight:800;color:rgba(255,255,255,.90);margin-bottom:20px">How Atlas creates &amp; captures value</h2>
+    <div class="grid grid-cols-5 gap-2" style="font-size:11px">
+      <div class="panel" style="padding:12px;grid-row:span 2">
+        <p style="font-weight:700;color:rgba(255,255,255,.50);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Key Partners</p>
+        <div class="space-y-1.5" style="color:rgba(255,255,255,.60)">
+          <p>Local gyms &amp; sports facilities</p>
+          <p>Supplement brands</p>
+          <p>Cebu City LGU</p>
+          <p>Fitness influencers</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px">
+        <p style="font-weight:700;color:rgba(255,255,255,.50);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Key Activities</p>
+        <div class="space-y-1.5" style="color:rgba(255,255,255,.60)">
+          <p>Platform development</p>
+          <p>Data curation</p>
+          <p>Community growth</p>
+          <p>Business partnerships</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px;grid-column:span 1;background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.18)">
+        <p style="font-weight:700;color:rgba(74,222,128,.70);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Value Proposition</p>
+        <div class="space-y-1.5" style="color:rgba(255,255,255,.65)">
+          <p>Fitness discovery + crowd intelligence</p>
+          <p>Community check-ins</p>
+          <p>Personalized recommendations</p>
+          <p>Cebu-specific platform</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px">
+        <p style="font-weight:700;color:rgba(255,255,255,.50);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Customer Relations</p>
+        <div class="space-y-1.5" style="color:rgba(255,255,255,.60)">
+          <p>Self-service app</p>
+          <p>Community-driven</p>
+          <p>Personalized feed</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px;grid-row:span 2">
+        <p style="font-weight:700;color:rgba(255,255,255,.50);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Customer Segments</p>
+        <div class="space-y-1.5" style="color:rgba(255,255,255,.60)">
+          <p>Fitness enthusiasts</p>
+          <p>Recreational athletes</p>
+          <p>Health-conscious professionals</p>
+          <p>18&ndash;40, Cebu City</p>
+          <p style="margin-top:8px;color:rgba(74,222,128,.60);font-weight:600">~280,000 users</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px">
+        <p style="font-weight:700;color:rgba(255,255,255,.50);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Key Resources</p>
+        <div class="space-y-1.5" style="color:rgba(255,255,255,.60)">
+          <p>Tech platform (MERN)</p>
+          <p>Location database</p>
+          <p>Developer team</p>
+          <p>Community users</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px">
+        <p style="font-weight:700;color:rgba(255,255,255,.50);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Channels</p>
+        <div class="space-y-1.5" style="color:rgba(255,255,255,.60)">
+          <p>Mobile web app</p>
+          <p>TikTok &amp; Instagram</p>
+          <p>Gym partnerships</p>
+          <p>Word of mouth</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px;grid-column:span 2;background:rgba(239,68,68,.04);border-color:rgba(239,68,68,.12)">
+        <p style="font-weight:700;color:rgba(248,113,113,.60);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Cost Structure</p>
+        <div class="flex gap-6" style="color:rgba(255,255,255,.60)">
+          <p>Cloud hosting &amp; infra</p>
+          <p>Development &amp; maintenance</p>
+          <p>Marketing &amp; growth</p>
+          <p>Customer support</p>
+        </div>
+      </div>
+      <div class="panel" style="padding:12px;grid-column:span 3;background:rgba(34,197,94,.04);border-color:rgba(34,197,94,.15)">
+        <p style="font-weight:700;color:rgba(74,222,128,.60);margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.06em">Revenue Streams</p>
+        <div class="flex gap-6" style="color:rgba(255,255,255,.65)">
+          <p>Premium listings &#8369;500&ndash;2K/mo</p>
+          <p>Featured placement ads</p>
+          <p>Premium analytics for businesses</p>
+          <p>Affiliate commissions</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 8: FINANCIALS -->
+<div class="slide" id="s8" style="background:#080c10">
+  <div class="w-full max-w-4xl">
+    <div class="kf mb-2">Revenue Model &amp; Financials</div>
+    <h2 style="font-size:36px;font-weight:800;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:28px">
+      Free for users.<br/><span class="accent">Revenue from businesses.</span>
+    </h2>
+    <div class="grid grid-cols-2 gap-5">
+      <div class="space-y-3">
+        <div class="panel" style="background:rgba(34,197,94,.04);border-color:rgba(34,197,94,.15)">
+          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(74,222,128,.6);margin-bottom:12px">Revenue Streams</p>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div style="width:6px;height:6px;border-radius:50%;background:#4ade80;margin-top:5px;flex-shrink:0"></div>
+              <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Premium Listings</p><p style="font-size:12px;color:rgba(255,255,255,.40)">&#8369;500&ndash;&#8369;2,000 / month per business</p></div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div style="width:6px;height:6px;border-radius:50%;background:#60a5fa;margin-top:5px;flex-shrink:0"></div>
+              <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Featured Placement</p><p style="font-size:12px;color:rgba(255,255,255,.40)">Sponsored cards in search &amp; recommendations</p></div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div style="width:6px;height:6px;border-radius:50%;background:#c084fc;margin-top:5px;flex-shrink:0"></div>
+              <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.80)">Affiliate Commissions</p><p style="font-size:12px;color:rgba(255,255,255,.40)">Supplement &amp; gear partner links</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:10px">Year 1 Operating Costs</p>
+          <div class="space-y-2">
+            <div class="flex justify-between"><span style="font-size:12px;color:rgba(255,255,255,.50)">Cloud hosting &amp; infra</span><span style="font-size:12px;color:rgba(255,255,255,.65)">&#8369;60,000</span></div>
+            <div class="flex justify-between"><span style="font-size:12px;color:rgba(255,255,255,.50)">Marketing &amp; growth</span><span style="font-size:12px;color:rgba(255,255,255,.65)">&#8369;80,000</span></div>
+            <div class="flex justify-between"><span style="font-size:12px;color:rgba(255,255,255,.50)">Development &amp; maintenance</span><span style="font-size:12px;color:rgba(255,255,255,.65)">&#8369;120,000</span></div>
+            <div class="flex justify-between" style="border-top:1px solid rgba(255,255,255,.07);padding-top:8px;margin-top:4px"><span style="font-size:12px;font-weight:600;color:rgba(255,255,255,.70)">Total burn</span><span style="font-size:12px;font-weight:700;color:#f87171">~&#8369;260,000 / yr</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel flex flex-col justify-between">
+        <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:16px">3-Year Projection</p>
+        <div class="space-y-4 flex-1">
+          <div>
+            <div class="flex justify-between mb-2">
+              <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.75)">Year 1</p><p style="font-size:11px;color:rgba(255,255,255,.35)">5K users &middot; 80 listings</p></div>
+              <p style="font-size:18px;font-weight:800;color:rgba(255,255,255,.60)">&#8369;240K</p>
+            </div>
+            <div style="height:6px;background:rgba(255,255,255,.07);border-radius:3px"><div style="width:15%;height:100%;background:rgba(74,222,128,.4);border-radius:3px"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.75)">Year 2</p><p style="font-size:11px;color:rgba(255,255,255,.35)">25K users &middot; 300 listings</p></div>
+              <p style="font-size:18px;font-weight:800;color:rgba(255,255,255,.75)">&#8369;1.8M</p>
+            </div>
+            <div style="height:6px;background:rgba(255,255,255,.07);border-radius:3px"><div style="width:45%;height:100%;background:rgba(74,222,128,.6);border-radius:3px"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <div><p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.75)">Year 3</p><p style="font-size:11px;color:rgba(255,255,255,.35)">80K users &middot; 800 listings</p></div>
+              <p style="font-size:18px;font-weight:800;color:#4ade80">&#8369;6.4M</p>
+            </div>
+            <div style="height:6px;background:rgba(255,255,255,.07);border-radius:3px"><div style="width:100%;height:100%;background:#4ade80;border-radius:3px"></div></div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:rgba(255,255,255,.25);margin-top:16px">Break-even projected at Month 14</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 9: TRACTION + ROADMAP -->
+<div class="slide" id="s9" style="background:#080c10">
+  <div class="w-full max-w-4xl">
+    <div class="kf mb-2">Traction &amp; Roadmap</div>
+    <h2 style="font-size:36px;font-weight:800;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:28px">
+      Already built.<br/><span class="accent">Ready to scale.</span>
+    </h2>
+    <div class="grid grid-cols-2 gap-5">
+      <div>
+        <div class="panel mb-4" style="background:rgba(34,197,94,.04);border-color:rgba(34,197,94,.15)">
+          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(74,222,128,.6);margin-bottom:12px">What We&rsquo;ve Built</p>
+          <div class="space-y-2.5">
+            <div class="flex gap-2.5 items-start"><span class="accent" style="font-size:14px;flex-shrink:0">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Fully working web app &mdash; not a mockup</p></div>
+            <div class="flex gap-2.5 items-start"><span class="accent" style="font-size:14px;flex-shrink:0">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">50+ Cebu locations across 9 areas seeded</p></div>
+            <div class="flex gap-2.5 items-start"><span class="accent" style="font-size:14px;flex-shrink:0">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Google OAuth + email/password auth</p></div>
+            <div class="flex gap-2.5 items-start"><span class="accent" style="font-size:14px;flex-shrink:0">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Crowd intelligence &amp; prediction engine</p></div>
+            <div class="flex gap-2.5 items-start"><span class="accent" style="font-size:14px;flex-shrink:0">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Community check-ins &amp; analytics dashboard</p></div>
+            <div class="flex gap-2.5 items-start"><span class="accent" style="font-size:14px;flex-shrink:0">&#10003;</span><p style="font-size:13px;color:rgba(255,255,255,.70)">Favorites, preferences, personalized feed</p></div>
+          </div>
+        </div>
+        <div class="panel">
+          <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:10px">Validation</p>
+          <div class="space-y-2">
+            <div class="flex gap-2"><span style="color:#fbbf24;font-size:14px">&#10003;</span><p style="font-size:12px;color:rgba(255,255,255,.55)">30+ Cebu gym-goers surveyed &mdash; 100% confirmed the problem</p></div>
+            <div class="flex gap-2"><span style="color:#fbbf24;font-size:14px">&#10003;</span><p style="font-size:12px;color:rgba(255,255,255,.55)">Local gym owners expressed interest in free listings</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:16px">Product Roadmap</p>
+        <div class="space-y-4">
+          <div class="flex gap-3">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+              <div style="width:10px;height:10px;border-radius:50%;background:#4ade80;flex-shrink:0"></div>
+              <div style="width:1px;flex:1;background:rgba(255,255,255,.08);margin-top:4px"></div>
+            </div>
+            <div style="padding-bottom:16px">
+              <p style="font-size:12px;font-weight:600;color:#4ade80;margin-bottom:2px">Now &mdash; MVP Live</p>
+              <p style="font-size:12px;color:rgba(255,255,255,.45)">50+ locations, crowd engine, auth, analytics, check-ins</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);flex-shrink:0"></div>
+              <div style="width:1px;flex:1;background:rgba(255,255,255,.08);margin-top:4px"></div>
+            </div>
+            <div style="padding-bottom:16px">
+              <p style="font-size:12px;font-weight:600;color:rgba(255,255,255,.65);margin-bottom:2px">Q3 2025 &mdash; Business Dashboard</p>
+              <p style="font-size:12px;color:rgba(255,255,255,.40)">Premium listings, analytics for businesses, verified badges</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);flex-shrink:0"></div>
+              <div style="width:1px;flex:1;background:rgba(255,255,255,.08);margin-top:4px"></div>
+            </div>
+            <div style="padding-bottom:16px">
+              <p style="font-size:12px;font-weight:600;color:rgba(255,255,255,.65);margin-bottom:2px">Q4 2025 &mdash; Mobile App</p>
+              <p style="font-size:12px;color:rgba(255,255,255,.40)">iOS &amp; Android, push notifications, booking integration</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);flex-shrink:0"></div>
+            </div>
+            <div>
+              <p style="font-size:12px;font-weight:600;color:rgba(255,255,255,.65);margin-bottom:2px">2026 &mdash; Expand</p>
+              <p style="font-size:12px;color:rgba(255,255,255,.40)">Mandaue, Lapu-Lapu, Mactan &rarr; other PH cities</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SLIDE 10: THE ASK / CLOSING -->
+<div class="slide" id="s10" style="background:linear-gradient(160deg,#080c10 0%,#0a1a0e 55%,#080c10 100%)">
+  <div class="w-full max-w-3xl text-center">
+    <div class="big mb-2">Atlas</div>
+    <h2 style="font-size:40px;font-weight:900;color:rgba(255,255,255,.90);line-height:1.15;margin-bottom:12px">
+      We&rsquo;re looking for<br/><span class="accent">&#8369;500,000 seed funding.</span>
+    </h2>
+    <p style="font-size:15px;color:rgba(255,255,255,.40);margin-bottom:36px">To fund mobile app development, marketing, and business development.</p>
+    <div class="grid grid-cols-3 gap-4 mb-10">
+      <div class="panel text-center" style="background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.15)">
+        <p style="font-size:22px;font-weight:800;color:#4ade80;margin-bottom:4px">Mobile App</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.40)">iOS &amp; Android launch</p>
+      </div>
+      <div class="panel text-center" style="background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.15)">
+        <p style="font-size:22px;font-weight:800;color:#4ade80;margin-bottom:4px">25,000</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.40)">Users in Year 1</p>
+      </div>
+      <div class="panel text-center" style="background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.15)">
+        <p style="font-size:22px;font-weight:800;color:#4ade80;margin-bottom:4px">200+</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.40)">Business listings Year 1</p>
+      </div>
+    </div>
+    <div class="panel inline-block px-8 py-4" style="background:rgba(255,255,255,.03)">
+      <p style="font-size:14px;color:rgba(255,255,255,.50);margin-bottom:4px">950,000 people. One platform. Let&rsquo;s build it.</p>
+      <p style="font-size:13px;color:rgba(255,255,255,.28)">atlas.cebu &nbsp;&middot;&nbsp; team@atlas.cebu</p>
+    </div>
+  </div>
+</div>
+</div><!-- /deck -->
+
+<!-- Navigation -->
+<div class="nav" id="nav-pill" style="cursor:grab">
+  <button onclick="go(-1)" id="btn-prev">&#8592; Prev</button>
+  <div style="display:flex;gap:6px;align-items:center" id="dots"></div>
+  <button onclick="go(1)" id="btn-next">Next &#8594;</button>
+</div>
+
+<script>
+const TOTAL = 10;
+let cur = 1;
+
+function go(dir) {
+  const next = Math.max(1, Math.min(TOTAL, cur + dir));
+  if (next === cur) return;
+  const prev = document.getElementById('s' + cur);
+  prev.classList.remove('active');
+  prev.classList.add('prev');
+  setTimeout(() => prev.classList.remove('prev'), 400);
+  cur = next;
+  document.getElementById('s' + cur).classList.add('active');
+  update();
+}
+
+function goTo(n) {
+  if (n === cur) return;
+  const prev = document.getElementById('s' + cur);
+  prev.classList.remove('active');
+  prev.classList.add('prev');
+  setTimeout(() => prev.classList.remove('prev'), 400);
+  cur = n;
+  document.getElementById('s' + cur).classList.add('active');
+  update();
+}
+
+function update() {
+  document.getElementById('prog').style.width = (cur / TOTAL * 100) + '%';
+  document.getElementById('snum').textContent = cur + ' / ' + TOTAL;
+  document.querySelectorAll('.dot-nav').forEach((d, i) => {
+    d.style.background = (i + 1 === cur) ? '#4ade80' : 'rgba(255,255,255,0.18)';
+    d.style.width = (i + 1 === cur) ? '20px' : '6px';
+  });
+  document.getElementById('btn-prev').style.opacity = cur === 1 ? '0.3' : '1';
+  document.getElementById('btn-next').style.opacity = cur === TOTAL ? '0.3' : '1';
+}
+
+// Build dots
+const dotsEl = document.getElementById('dots');
+for (let i = 1; i <= TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot-nav';
+  d.style.cssText = 'height:6px;border-radius:3px;cursor:pointer;transition:all .2s;background:rgba(255,255,255,0.18);width:6px';
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+}
+
+// Keyboard navigation handled by unified handler below
+
+// Touch swipe
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = tx - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 50) go(dx > 0 ? 1 : -1);
+});
+
+update();
+</script>
+<!-- SPEAKER NOTES PANEL -->
+<div id="notes-panel" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);width:min(720px,90vw);background:rgba(8,12,16,0.97);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:0;z-index:300;backdrop-filter:blur(20px);box-shadow:0 16px 48px rgba(0,0,0,0.6);user-select:none">
+  <!-- Drag handle -->
+  <div id="notes-drag-handle" style="display:flex;justify-content:space-between;align-items:center;padding:12px 18px 10px;border-bottom:1px solid rgba(255,255,255,0.07);cursor:grab;border-radius:14px 14px 0 0">
+    <div style="display:flex;align-items:center;gap:8px">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="opacity:0.3"><circle cx="3" cy="3" r="1.2" fill="white"/><circle cx="9" cy="3" r="1.2" fill="white"/><circle cx="3" cy="9" r="1.2" fill="white"/><circle cx="9" cy="9" r="1.2" fill="white"/><circle cx="3" cy="6" r="1.2" fill="white"/><circle cx="9" cy="6" r="1.2" fill="white"/></svg>
+      <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:rgba(74,222,128,0.7)">Speaker Notes</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span id="notes-timer" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.35);font-variant-numeric:tabular-nums">0:00</span>
+      <span style="font-size:10px;color:rgba(255,255,255,0.20)">N to hide &nbsp;·&nbsp; drag to move</span>
+    </div>
+  </div>
+  <!-- Content -->
+  <div style="padding:16px 18px 14px">
+    <p id="notes-text" style="font-size:13px;line-height:1.7;color:rgba(255,255,255,0.70);margin-bottom:12px"></p>
+    <div style="padding-top:10px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center">
+      <span id="notes-timing" style="font-size:11px;color:rgba(255,255,255,0.28)"></span>
+      <span id="notes-tip" style="font-size:11px;color:rgba(74,222,128,0.50)"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+const NOTES = {
+  1: {
+    text: "Good morning / afternoon. My name is [your name], and this is Atlas — Cebu's fitness and sports discovery platform. In the next three minutes, I'll show you the problem we're solving, how we solve it, and why now is the right time.",
+    timing: "0:00 – 0:05",
+    tip: "Say it confidently. Let the slide breathe for 2 seconds before moving on."
+  },
+  2: {
+    text: "Let me tell you about Maria. She's a BPO worker in IT Park. After her shift, she wants to play badminton — but she has no idea where the nearest court is, whether it's open, or how crowded it gets at 10 PM. She ends up scrolling Facebook groups for 20 minutes and still isn't sure. This is the reality for hundreds of thousands of people in Cebu every single day. There is no dedicated platform for fitness discovery here. Google Maps doesn't show crowd levels or fitness-specific filters. People rely on word of mouth. The result? Wasted trips, missed workouts, and frustration.",
+    timing: "0:05 – 0:35",
+    tip: "Slow down on the Maria story. Make eye contact. Let the problem land before moving."
+  },
+  3: {
+    text: "Atlas solves this. It's an interactive map of over 50 gyms, parks, sports courts, and nutrition stores across Cebu — with real-time crowd levels reported by the community. You can filter by distance, price, amenities like AC or parking, and rating. And our smart suggestion engine tells you the best time to visit — 'Best time: before 9 AM' — so you never show up to a packed gym again. The best part? You don't even need an account to browse. Zero friction.",
+    timing: "0:35 – 1:05",
+    tip: "Point at the screenshot if you have it on screen. Say 'this is the actual app' — not a mockup."
+  },
+  4: {
+    text: "Now let's talk about the opportunity. Cebu City has 950,000 people. Our target market — health-conscious adults aged 18 to 40 — is around 280,000. The Philippine fitness industry is growing at 8.5% annually, driven by a post-pandemic surge in gym memberships and outdoor activity. The total addressable market for Cebu fitness and sports alone is 180 million pesos. We're targeting 10% of that by Year 3.",
+    timing: "1:05 – 1:25",
+    tip: "Hit the three big numbers: 950K, 280K, 8.5%. Don't read every segment — just the headline."
+  },
+  5: {
+    text: "Our value proposition is simple: the right place, at the right time, every time. For users — save time, avoid crowds, discover hidden spots, get a personalized feed. For businesses — free visibility to thousands of active users, community credibility through check-ins, and premium analytics on peak hours. No other platform in Cebu offers this combination. We're not just a map. We're a fitness intelligence platform.",
+    timing: "1:25 – 1:45",
+    tip: "Emphasize 'no other platform in Cebu.' That's the key differentiator. Say it clearly."
+  },
+  6: {
+    text: "Every business has competition. Google Maps is generic and global. Strava is fitness-focused but not local. Facebook groups are local but unstructured and slow. None of them combine fitness-specific discovery with hyper-local context and crowd intelligence. On the perceptual map, we sit in the bottom-right quadrant — fitness-specific and hyper-local. That's a blue ocean. Nobody is there.",
+    timing: "1:45 – 2:00",
+    tip: "Point at the perceptual map. Say 'blue ocean' — investors know what that means."
+  },
+  7: {
+    text: "Here's how Atlas creates and captures value. Our key partners are local gyms, sports facilities, supplement brands, and the Cebu City LGU. Our value proposition sits at the center — fitness discovery plus crowd intelligence plus community. We serve 280,000 target users through our web app and social media channels. Revenue comes from premium business listings at 500 to 2,000 pesos per month, featured placement ads, and affiliate commissions. Our cost structure is lean — under 260,000 pesos per year to operate.",
+    timing: "2:00 – 2:20",
+    tip: "Don't read every cell. Walk through it: partners ? value ? customers ? revenue. 20 seconds max."
+  },
+  8: {
+    text: "The model is simple: free for users, revenue from businesses. In Year 1, 80 business listings generate 240,000 pesos. By Year 3, 800 listings and 80,000 users bring in 6.4 million pesos. Our operating costs are lean — about 260,000 pesos per year. We project break-even at Month 14.",
+    timing: "2:20 – 2:35",
+    tip: "Hit Year 1 and Year 3 numbers clearly. The gap between them tells the growth story."
+  },
+  9: {
+    text: "This is not a concept. Atlas is already built and working. We have 50-plus Cebu locations seeded, a full authentication system, crowd intelligence, community check-ins, and an analytics dashboard — all live. We surveyed 30 Cebu gym-goers and 100% confirmed the problem. Local gym owners have already expressed interest in free listings. Next: business dashboard in Q3, mobile app in Q4, and expansion to Mandaue and Lapu-Lapu in 2026.",
+    timing: "2:35 – 2:50",
+    tip: "Say 'already built' with confidence. This is your strongest validation point."
+  },
+  10: {
+    text: "We're asking for 500,000 pesos in seed funding. This unlocks our mobile app launch, a marketing campaign to reach 25,000 users in Year 1, and a business development push to onboard 200-plus listings. 950,000 people. Zero dedicated fitness apps. One team that built the solution. Thank you.",
+    timing: "2:50 – 3:00",
+    tip: "Pause before 'Thank you.' Make eye contact. Smile. You're done — own it."
+  }
+};
+
+let notesVisible = false;
+let timerInterval = null;
+let seconds = 0;
+
+function updateNotes() {
+  const n = NOTES[cur];
+  if (!n) return;
+  document.getElementById('notes-text').textContent = n.text;
+  document.getElementById('notes-timing').textContent = 'Target: ' + n.timing;
+  document.getElementById('notes-tip').textContent = n.tip;
+}
+
+function toggleNotes() {
+  notesVisible = !notesVisible;
+  const panel = document.getElementById('notes-panel');
+  if (notesVisible) {
+    panel.style.display = 'block';
+    // Reset transform so position:fixed bottom/left takes over on first open
+    if (!panel._dragged) {
+      panel.style.transform = 'translateX(-50%)';
+    }
+    if (!timerInterval) {
+      timerInterval = setInterval(() => {
+        seconds++;
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        document.getElementById('notes-timer').textContent = m + ':' + String(s).padStart(2,'0');
+        const el = document.getElementById('notes-timer');
+        if (seconds > 180) { el.style.color = '#f87171'; }
+        else if (seconds > 150) { el.style.color = '#fbbf24'; }
+        else { el.style.color = 'rgba(255,255,255,0.35)'; }
+      }, 1000);
+    }
+    updateNotes();
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+// -- Drag logic ----------------------------------------------------------
+(function() {
+  const panel = document.getElementById('notes-panel');
+  const handle = document.getElementById('notes-drag-handle');
+  let dragging = false, ox = 0, oy = 0;
+
+  handle.addEventListener('mousedown', function(e) {
+    dragging = true;
+    handle.style.cursor = 'grabbing';
+    const rect = panel.getBoundingClientRect();
+    // Switch from bottom/transform positioning to top/left absolute coords
+    panel.style.transform = 'none';
+    panel.style.bottom = 'auto';
+    panel.style.left = rect.left + 'px';
+    panel.style.top = rect.top + 'px';
+    panel._dragged = true;
+    ox = e.clientX - rect.left;
+    oy = e.clientY - rect.top;
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    let nx = e.clientX - ox;
+    let ny = e.clientY - oy;
+    // Clamp to viewport
+    nx = Math.max(0, Math.min(window.innerWidth - panel.offsetWidth, nx));
+    ny = Math.max(0, Math.min(window.innerHeight - panel.offsetHeight, ny));
+    panel.style.left = nx + 'px';
+    panel.style.top = ny + 'px';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (dragging) { dragging = false; handle.style.cursor = 'grab'; }
+  });
+})();
+
+// Single unified keyboard handler — replaces the one in the nav script
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault(); go(1); if (notesVisible) updateNotes();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault(); go(-1); if (notesVisible) updateNotes();
+  } else if (e.key === 'n' || e.key === 'N') {
+    toggleNotes();
+  }
+});
+</script><script>
+// -- Draggable nav pill ---------------------------------------------------
+(function() {
+  const pill = document.getElementById('nav-pill');
+  let dragging = false, ox = 0, oy = 0;
+
+  // Switch pill from fixed+transform to fixed+top+left on first drag
+  function initPos() {
+    if (pill._initDone) return;
+    pill._initDone = true;
+    const rect = pill.getBoundingClientRect();
+    pill.style.transform = 'none';
+    pill.style.bottom = 'auto';
+    pill.style.left = rect.left + 'px';
+    pill.style.top = rect.top + 'px';
+  }
+
+  pill.addEventListener('mousedown', function(e) {
+    // Don't start drag if clicking a button
+    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+    initPos();
+    dragging = true;
+    pill.style.cursor = 'grabbing';
+    ox = e.clientX - pill.getBoundingClientRect().left;
+    oy = e.clientY - pill.getBoundingClientRect().top;
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    let nx = e.clientX - ox;
+    let ny = e.clientY - oy;
+    // Clamp inside viewport
+    nx = Math.max(0, Math.min(window.innerWidth - pill.offsetWidth, nx));
+    ny = Math.max(0, Math.min(window.innerHeight - pill.offsetHeight, ny));
+    pill.style.left = nx + 'px';
+    pill.style.top = ny + 'px';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (dragging) {
+      dragging = false;
+      pill.style.cursor = 'grab';
+    }
+  });
+})();
+</script></body>
+</html>
+
+
+
+
+
+
+
+
